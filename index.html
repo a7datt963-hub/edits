@@ -3,26 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIPRO - Dark Edition</title>
+    <title>VIPRO - Edit Vipro Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            --primary: #520000; /* أحمر داكن جداً */
-            --accent: #ff0000; /* أحمر فاتح للتوهج */
-            --bg-dark: #000000; /* أسود */
-            --bg-card: #0f0f0f; /* أسود رمادي */
+            --primary: #520000;
+            --accent: #ff0000;
+            --bg-dark: #000000;
+            --bg-card: #0f0f0f;
             --text-main: #ffffff;
-            --glass: rgba(82, 0, 0, 0.2); /* زجاج محمر */
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
 
         body {
             background-color: var(--bg-dark);
@@ -33,107 +27,73 @@
 
         /* --- Header --- */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background: rgba(0,0,0,0.9);
-            border-bottom: 2px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px; background: rgba(0,0,0,0.9);
+            border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100;
         }
 
-        .logo-container img {
-            height: 50px;
-            filter: drop-shadow(0 0 5px var(--accent));
-        }
-
+        .logo-container img { height: 50px; filter: drop-shadow(0 0 5px var(--accent)); }
         .menu-btn { font-size: 24px; cursor: pointer; color: var(--text-main); }
 
         /* --- Sidebar --- */
         .sidebar {
-            position: fixed; top: 0; right: -250px; width: 250px; height: 100%;
+            position: fixed; top: 0; right: -300px; width: 300px; height: 100%;
             background: #050505; border-left: 2px solid var(--primary);
-            transition: 0.3s; z-index: 1000; padding-top: 60px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000; padding-top: 60px;
+            box-shadow: -10px 0 20px rgba(0,0,0,0.8);
         }
         .sidebar.active { right: 0; }
-        .sidebar ul { list-style: none; padding: 20px; }
-        .sidebar ul li { padding: 15px; border-bottom: 1px solid #222; cursor: pointer; color: #fff; }
-        .sidebar ul li:hover { color: var(--accent); padding-right: 25px; }
-        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 25px; cursor: pointer; }
-
-        /* --- Container --- */
-        .container {
-            max-width: 600px; margin: 20px auto; padding: 20px;
+        .sidebar ul { list-style: none; padding: 10px; }
+        .sidebar ul li { 
+            padding: 15px; border-bottom: 1px solid #1a1a1a; cursor: pointer; 
+            color: #ccc; transition: 0.3s; display: flex; align-items: center; gap: 10px;
         }
+        .sidebar ul li:hover { color: var(--accent); background: #111; padding-right: 25px; }
+        .sidebar a { text-decoration: none; color: inherit; display: flex; align-items: center; width: 100%; }
+        
+        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 25px; cursor: pointer; color: var(--accent); }
 
-        /* --- Cards --- */
+        /* --- About Section In Sidebar --- */
+        .about-box {
+            padding: 20px; font-size: 13px; line-height: 1.6; color: #bbb;
+            border-top: 1px solid var(--primary); margin-top: 20px;
+        }
+        .social-links { display: flex; gap: 15px; margin-top: 15px; justify-content: center; }
+        .social-links a { font-size: 20px; color: var(--accent); width: auto; }
+
+        /* --- Main Content --- */
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; }
+
         .card {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 15px rgba(82, 0, 0, 0.3);
-            animation: fadeIn 0.8s;
+            background: var(--bg-card); border-radius: 10px; padding: 20px;
+            margin-bottom: 20px; border: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(82, 0, 0, 0.3); animation: fadeIn 0.8s;
         }
 
-        .info-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-        }
-
-        .info-item {
-            background: #000;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            border: 1px solid #333;
-        }
-
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .info-item { background: #000; padding: 10px; border-radius: 5px; text-align: center; border: 1px solid #333; }
         .info-item h4 { font-size: 11px; color: #aaa; margin-bottom: 5px; }
         .info-item span { color: #fff; font-weight: bold; font-size: 14px; }
 
-        /* --- Button --- */
         .action-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(180deg, var(--primary), #200000);
-            border: 1px solid var(--accent);
-            border-radius: 5px;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--primary);
-            margin-top: 10px;
-            display: none; /* مخفي حتى تكتمل البيانات */
+            width: 100%; padding: 15px; background: linear-gradient(180deg, var(--primary), #200000);
+            border: 1px solid var(--accent); border-radius: 5px; color: white;
+            font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; display: none;
         }
-        
-        .action-btn:hover { background: var(--accent); }
 
         /* --- Settings Bars --- */
         .sens-result { display: none; margin-top: 20px; }
         .sens-item { margin-bottom: 12px; }
-        .sens-header { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 3px; }
-        .progress-bar-bg { width: 100%; height: 8px; background: #222; border-radius: 2px; }
+        .sens-header { display: flex; justify-content: space-between; font-size: 14px; }
+        .progress-bar-bg { width: 100%; height: 8px; background: #222; border-radius: 2px; margin-top: 5px; }
         .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 1s; box-shadow: 0 0 5px var(--primary); }
 
-        /* DPI Box */
         .dpi-box {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-weight: bold;
-            border: 1px solid var(--accent);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            background: var(--primary); color: white; padding: 15px; text-align: center;
+            border-radius: 5px; margin-top: 20px; font-weight: bold; border: 1px solid var(--accent);
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
         .loader { text-align: center; color: var(--accent); margin: 50px 0; }
     </style>
 </head>
@@ -142,10 +102,28 @@
     <div class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleSidebar()">&times;</div>
         <ul>
-            <li><i class="fas fa-home"></i> الرئيسية</li>
-            <li><i class="fas fa-cog"></i> إعدادات DPI</li>
-            <li><i class="fas fa-info-circle"></i> حول</li>
+            <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li>
+                <a href="https://viproo.netlify.app" target="_blank">
+                    <i class="fas fa-shopping-cart"></i> متجرنا الإلكتروني
+                </a>
+            </li>
+            <li>
+                <a href="https://wa.me/79228576801" target="_blank">
+                    <i class="fab fa-whatsapp"></i> واتساب الدعم
+                </a>
+            </li>
         </ul>
+
+        <div class="about-box">
+            <h4 style="color: var(--accent); margin-bottom: 10px;">حول المطور</h4>
+            <p>نحن مطوروا موقع <strong>ايديت فيبرو (Edit Vipro)</strong>، متخصصون في تقديم أفضل إعدادات الحساسية والـ DPI للعبة فري فاير لضمان أفضل أداء وهيدشوت.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/vipro__store?igsh=dXU4ZWowazlzbXMw" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/79228576801" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top: 15px; font-size: 11px; text-align: center;">تواصل معنا: +7 922 857-68-01</p>
+        </div>
     </div>
 
     <header>
@@ -155,165 +133,102 @@
     </header>
 
     <div class="container">
-        
         <div class="loader" id="loader">
-            <i class="fas fa-dna fa-spin fa-3x"></i>
-            <p style="margin-top: 15px;">جاري تحليل نوع المعالج والذاكرة...</p>
+            <i class="fas fa-ghost fa-spin fa-3x"></i>
+            <p style="margin-top: 15px;">Edit Vipro يقوم بتحليل عتادك...</p>
         </div>
 
         <div class="card" id="deviceCard" style="display: none;">
             <h3 style="color: var(--accent); margin-bottom: 15px; text-align: center;">
-                <i class="fas fa-mobile"></i> بيانات هاتفك
+                <i class="fas fa-microchip"></i> مواصفات الجهاز المستكشفة
             </h3>
             <div class="info-grid">
-                <div class="info-item" style="grid-column: span 2; border-color: var(--primary);">
-                    <h4>اسم الهاتف</h4>
+                <div class="info-item" style="grid-column: span 2;">
+                    <h4>موديل الهاتف</h4>
                     <span id="deviceModel">...</span>
                 </div>
-                <div class="info-item">
-                    <h4>الرام (RAM)</h4>
-                    <span id="ramSize">...</span>
-                </div>
-                <div class="info-item">
-                    <h4>الأندرويد</h4>
-                    <span id="osVersion">...</span>
-                </div>
-                <div class="info-item">
-                    <h4>IP</h4>
-                    <span id="userIp" style="font-size: 12px;">...</span>
-                </div>
-                <div class="info-item">
-                    <h4>العرض (Resolution)</h4>
-                    <span id="resInfo">...</span>
-                </div>
+                <div class="info-item"><h4>الرام</h4><span id="ramSize">...</span></div>
+                <div class="info-item"><h4>النظام</h4><span id="osVersion">...</span></div>
+                <div class="info-item" style="grid-column: span 2;"><h4>عنوان الاتصال IP</h4><span id="userIp">...</span></div>
             </div>
             
             <button class="action-btn" id="showSettingsBtn" onclick="revealSettings()">
-                عرض الإعدادات و DPI المناسب <i class="fas fa-chevron-down"></i>
+                استخراج إعدادات الهيدشوت <i class="fas fa-fire"></i>
             </button>
         </div>
 
         <div class="card sens-result" id="sensCard">
             <h3 style="color: #fff; border-bottom: 1px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px;">
-                <i class="fas fa-crosshairs"></i> إعدادات الهيدشوت
+                <i class="fas fa-crosshairs"></i> إعدادات Edit Vipro الذكية
             </h3>
-            
             <div id="settingsContainer"></div>
-
             <div class="dpi-box">
-                <i class="fas fa-ruler-combined"></i> أفضل DPI لهاتفك: <span id="dpiValue" style="font-size: 24px; color: #ffff00;">0</span>
+                <i class="fas fa-tachometer-alt"></i> DPI المقترح: <span id="dpiValue" style="font-size: 24px; color: #ff0000;">0</span>
             </div>
-            <p style="text-align: center; font-size: 11px; color: #888; margin-top: 5px;">يتم تغيير الـ DPI من خيارات المطور (أصغر عرض).</p>
         </div>
-
     </div>
 
     <script>
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
 
-        // تشغيل تلقائي عند فتح الصفحة
         window.onload = async function() {
-            setTimeout(async () => {
-                await autoAnalyze();
-            }, 1500); // تأخير بسيط جداً ليبدو وكأنه يفحص
+            setTimeout(async () => { await autoAnalyze(); }, 1500);
         };
 
         let deviceSpecs = {};
 
         async function autoAnalyze() {
-            const loader = document.getElementById('loader');
-            const deviceCard = document.getElementById('deviceCard');
-            const showBtn = document.getElementById('showSettingsBtn');
-
-            // 1. كشف الموديل (محاولة استخراج الاسم)
             let ua = navigator.userAgent;
             let modelName = "Android Device";
-            
-            // محاولة استخراج رقم الموديل (مثل SM-A50 أو Pixel)
             let match = ua.match(/\(([^)]+)\)/);
             if (match && match[1]) {
                 let parts = match[1].split(';');
-                // غالباً الجزء الأخير يحتوي على الموديل في أندرويد
-                for (let part of parts) {
-                    if (part.includes("Build")) {
-                        modelName = part.replace("Build", "").trim();
-                    }
-                }
+                modelName = parts[parts.length - 1].split('Build')[0].trim() || "Mobile Device";
             }
-            if (ua.includes("iPhone")) modelName = "iPhone (iOS)";
 
-            // 2. كشف الرام والبيانات
-            let ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "غير معروف (4GB+)";
-            let os = ua.includes("Android") ? "Android" : "iOS/Other";
-            
-            // 3. جلب IP
-            let ip = "Checking...";
+            let ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "4GB+";
+            let ip = "127.0.0.1";
             try {
                 let r = await fetch('https://api.ipify.org?format=json');
                 let d = await r.json();
                 ip = d.ip;
-            } catch(e) { ip = "Hidden"; }
+            } catch(e) {}
 
-            // تخزين البيانات
             deviceSpecs = {
                 model: modelName,
                 ram: ram,
-                os: os,
                 ip: ip,
-                width: window.screen.width,
-                isHighEnd: (navigator.deviceMemory >= 6 || modelName.includes("iPhone"))
+                isHighEnd: (navigator.deviceMemory >= 6)
             };
 
-            // عرض البيانات في الصفحة
-            document.getElementById('deviceModel').innerText = deviceSpecs.model; // اسم الهاتف
+            document.getElementById('deviceModel').innerText = deviceSpecs.model;
             document.getElementById('ramSize').innerText = deviceSpecs.ram;
-            document.getElementById('osVersion').innerText = deviceSpecs.os;
+            document.getElementById('osVersion').innerText = ua.includes("Android") ? "Android" : "iOS";
             document.getElementById('userIp').innerText = deviceSpecs.ip;
-            document.getElementById('resInfo').innerText = window.screen.width + "x" + window.screen.height;
 
-            // إخفاء اللودر وإظهار الكارت
-            loader.style.display = 'none';
-            deviceCard.style.display = 'block';
-            showBtn.style.display = 'block'; // إظهار زر الإعدادات
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('deviceCard').style.display = 'block';
+            document.getElementById('showSettingsBtn').style.display = 'block';
         }
 
         function revealSettings() {
-            const sensCard = document.getElementById('sensCard');
-            const btn = document.getElementById('showSettingsBtn');
+            document.getElementById('showSettingsBtn').style.display = 'none';
+            document.getElementById('sensCard').style.display = 'block';
+
+            let s = deviceSpecs.isHighEnd ? 
+                { "عام": 94, "نقطة حمراء": 89, "×2": 92, "×4": 88, "قناصة": 45, "نظرة حرة": 70 } :
+                { "عام": 100, "نقطة حمراء": 98, "×2": 95, "×4": 92, "قناصة": 52, "نظرة حرة": 80 };
+
+            document.getElementById('dpiValue').innerText = deviceSpecs.isHighEnd ? 520 : 411;
+
             const container = document.getElementById('settingsContainer');
-            
-            btn.style.display = 'none'; // إخفاء الزر بعد الضغط
-            sensCard.style.display = 'block';
-
-            // حساب الإعدادات بناءً على قوة الجهاز
-            let isStrong = deviceSpecs.isHighEnd;
-            
-            let settings = {
-                "عام (General)": isStrong ? 92 : 100,
-                "نقطة حمراء (Red Dot)": isStrong ? 88 : 98,
-                "سكوب 2 (2x)": isStrong ? 90 : 96,
-                "سكوب 4 (4x)": isStrong ? 85 : 94,
-                "قناصة (Sniper)": 50,
-                "نظرة حرة (Free Look)": 65
-            };
-
-            // حساب الـ DPI
-            let dpiRec = isStrong ? 480 : 411; // 411 هو الافتراضي للأجهزة المتوسطة، 480 للقوية
-            if (deviceSpecs.width < 360) dpiRec = 360; // للأجهزة الصغيرة جداً
-
-            document.getElementById('dpiValue').innerText = dpiRec;
-
-            // توليد الشرائط
             container.innerHTML = "";
-            for (const [key, val] of Object.entries(settings)) {
+            for (const [key, val] of Object.entries(s)) {
                 container.innerHTML += `
                     <div class="sens-item">
                         <div class="sens-header"><span>${key}</span><span>${val}</span></div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-fill" style="width: ${val}%"></div>
-                        </div>
-                    </div>
-                `;
+                        <div class="progress-bar-bg"><div class="progress-fill" style="width: ${val}%"></div></div>
+                    </div>`;
             }
         }
     </script>
