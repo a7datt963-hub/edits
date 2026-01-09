@@ -1,256 +1,224 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIPRO - Edit Vipro Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Vipro - Free Fire</title>
 
-    <style>
-        :root {
-            --primary: #520000;
-            --accent: #ff0000;
-            --bg-dark: #000000;
-            --bg-card: #0f0f0f;
-            --text-main: #ffffff;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at top, #200000, #000000);
-        }
-
-        /* --- Header --- */
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 20px; background: rgba(0,0,0,0.9);
-            border-bottom: 2px solid var(--primary); position: sticky; top: 0; z-index: 100;
-        }
-
-        .logo-container img { height: 50px; filter: drop-shadow(0 0 5px var(--accent)); }
-        .menu-btn { font-size: 24px; cursor: pointer; color: var(--text-main); }
-
-        /* --- Sidebar --- */
-        .sidebar {
-            position: fixed; top: 0; right: -300px; width: 300px; height: 100%;
-            background: #050505; border-left: 2px solid var(--primary);
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1000; padding-top: 60px;
-            box-shadow: -10px 0 20px rgba(0,0,0,0.8);
-        }
-        .sidebar.active { right: 0; }
-        .sidebar ul { list-style: none; padding: 10px; }
-        .sidebar ul li { 
-            padding: 15px; border-bottom: 1px solid #1a1a1a; cursor: pointer; 
-            color: #ccc; transition: 0.3s; display: flex; align-items: center; gap: 10px;
-        }
-        .sidebar ul li:hover { color: var(--accent); background: #111; padding-right: 25px; }
-        .sidebar a { text-decoration: none; color: inherit; display: flex; align-items: center; width: 100%; }
-        
-        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 25px; cursor: pointer; color: var(--accent); }
-
-        /* --- About Section In Sidebar --- */
-        .about-box {
-            padding: 20px; font-size: 13px; line-height: 1.6; color: #bbb;
-            border-top: 1px solid var(--primary); margin-top: 20px;
-        }
-        .social-links { display: flex; gap: 15px; margin-top: 15px; justify-content: center; }
-        .social-links a { font-size: 20px; color: var(--accent); width: auto; }
-
-        /* --- Main Content --- */
-        .container { max-width: 600px; margin: 20px auto; padding: 20px; }
-
-        .card {
-            background: var(--bg-card); border-radius: 10px; padding: 20px;
-            margin-bottom: 20px; border: 1px solid var(--primary);
-            box-shadow: 0 0 15px rgba(82, 0, 0, 0.3); animation: fadeIn 0.8s;
-        }
-
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .info-item { background: #000; padding: 10px; border-radius: 5px; text-align: center; border: 1px solid #333; }
-        .info-item h4 { font-size: 11px; color: #aaa; margin-bottom: 5px; }
-        .info-item span { color: #fff; font-weight: bold; font-size: 14px; }
-
-        .action-btn {
-            width: 100%; padding: 15px; background: linear-gradient(180deg, var(--primary), #200000);
-            border: 1px solid var(--accent); border-radius: 5px; color: white;
-            font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; display: none;
-        }
-
-        /* --- Settings Bars --- */
-        .sens-result { display: none; margin-top: 20px; }
-        .sens-item { margin-bottom: 12px; }
-        .sens-header { display: flex; justify-content: space-between; font-size: 14px; }
-        .progress-bar-bg { width: 100%; height: 8px; background: #222; border-radius: 2px; margin-top: 5px; }
-        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 1s; box-shadow: 0 0 5px var(--primary); }
-
-        .dpi-box {
-            background: var(--primary); color: white; padding: 15px; text-align: center;
-            border-radius: 5px; margin-top: 20px; font-weight: bold; border: 1px solid var(--accent);
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .loader { text-align: center; color: var(--accent); margin: 50px 0; }
-    </style>
+<style>
+:root{
+  --main:#520000;
+  --dark:#000;
+}
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{
+  margin:0;
+  background:#111;
+  color:#fff;
+  display:flex;
+}
+aside{
+  width:260px;
+  background:#000;
+  padding:20px;
+}
+aside h3{color:var(--main)}
+aside a{color:#fff;text-decoration:none;display:block;margin:10px 0}
+main{flex:1;padding:20px}
+header{display:flex;align-items:center;gap:15px}
+header img{width:60px}
+.card{
+  background:#1b1b1b;
+  border-radius:12px;
+  padding:15px;
+  margin-top:20px;
+}
+.card h4{color:var(--main)}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+}
+.value{
+  background:#000;
+  padding:10px;
+  border-radius:8px;
+  text-align:center;
+}
+input,select,button{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  margin-top:10px;
+}
+button{
+  background:var(--main);
+  color:#fff;
+  cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="sidebar" id="sidebar">
-        <div class="close-btn" onclick="toggleSidebar()">&times;</div>
-        <ul>
-            <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
-            <li>
-                <a href="https://viproo.netlify.app" target="_blank">
-                    <i class="fas fa-shopping-cart"></i> متجرنا الإلكتروني
-                </a>
-            </li>
-            <li>
-                <a href="https://wa.me/79228576801" target="_blank">
-                    <i class="fab fa-whatsapp"></i> واتساب الدعم
-                </a>
-            </li>
-        </ul>
+<aside>
+  <h3>حول</h3>
+  <p>
+    نحن مطوروا موقع ايديت فيبرو لعرض افضل اعدادات للعبة فري فاير
+  </p>
 
-        <div class="about-box">
-            <h4 style="color: var(--accent); margin-bottom: 10px;">حول المطور</h4>
-            <p>نحن مطوروا موقع <strong>ايديت فيبرو (Edit Vipro)</strong>، متخصصون في تقديم أفضل إعدادات الحساسية والـ DPI للعبة فري فاير لضمان أفضل أداء وهيدشوت.</p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/vipro__store?igsh=dXU4ZWowazlzbXMw" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/79228576801" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p style="margin-top: 15px; font-size: 11px; text-align: center;">+7 922 857-68-01</p>
-        </div>
-    </div>
+  <a href="https://www.instagram.com/vipro__store?igsh=dXU4ZWowazlzbXMw" target="_blank">📸 انستغرام</a>
+  <a href="https://wa.me/79228576801">📱 واتساب</a>
 
-    <header>
-        <div class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
-        <div class="logo-container"><img src="vipro.png" alt="VIPRO"></div>
-        <div style="width: 24px;"></div>
-    </header>
+  <h3>متجرنا</h3>
+  <a href="https://viproo.netlify.app" target="_blank">🛒 viproo.netlify.app</a>
+</aside>
 
-    <div class="container">
-        <div class="loader" id="loader">
-            <i class="fas fa-ghost fa-spin fa-3x"></i>
-            <p style="margin-top: 15px;">Edit Vipro يقوم بتحليل عتادك...</p>
-        </div>
+<main>
 
-        <div class="card" id="deviceCard" style="display: none;">
-            <h3 style="color: var(--accent); margin-bottom: 15px; text-align: center;">
-                <i class="fas fa-microchip"></i> مواصفات الجهاز المستكشفة
-            </h3>
-            <div class="info-grid">
-                <div class="info-item" style="grid-column: span 2; border-color: var(--accent);">
-                    <h4>موديل الهاتف المستكشف</h4>
-                    <span id="deviceModel" style="color: var(--accent); font-size: 18px;">...</span>
-                </div>
-                <div class="info-item"><h4>الرام</h4><span id="ramSize">...</span></div>
-                <div class="info-item"><h4>النظام</h4><span id="osVersion">...</span></div>
-                <div class="info-item" style="grid-column: span 2;"><h4>عنوان الاتصال IP</h4><span id="userIp">...</span></div>
-            </div>
-            
-            <button class="action-btn" id="showSettingsBtn" onclick="revealSettings()">
-                استخراج إعدادات الهيدشوت لـ <span id="btnDeviceName"></span> <i class="fas fa-fire"></i>
-            </button>
-        </div>
+<header>
+  <img src="vipro.png">
+  <h2>Edit Vipro – Free Fire Settings</h2>
+</header>
 
-        <div class="card sens-result" id="sensCard">
-            <h3 style="color: #fff; border-bottom: 1px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px;">
-                <i class="fas fa-crosshairs"></i> إعدادات الذكاء الاصطناعي
-            </h3>
-            <div id="settingsContainer"></div>
-            <div class="dpi-box">
-                <i class="fas fa-tachometer-alt"></i> DPI المقترح (أصغر عرض): <span id="dpiValue" style="font-size: 28px; color: #ffff00;">0</span>
-            </div>
-        </div>
-    </div>
+<!-- بيانات الهاتف -->
+<div class="card">
+  <h4>📱 بيانات جهازك</h4>
+  <div class="grid" id="deviceInfo"></div>
+</div>
 
-    <script>
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+<!-- البحث الذكي -->
+<div class="card">
+  <h4>🔍 بحث ذكي عن هاتفك</h4>
+  <input type="text" id="searchPhone" placeholder="اكتب اسم الهاتف (مثال: Redmi 8)">
+  <select id="phoneSelect"></select>
+  <button onclick="applySettings()">عرض الإعدادات المناسبة</button>
+</div>
 
-        window.onload = async function() {
-            setTimeout(async () => { await autoAnalyze(); }, 1500);
-        };
+<!-- الإعدادات -->
+<div class="card">
+  <h4>🎯 إعدادات فري فاير</h4>
+  <div class="grid" id="settings"></div>
+</div>
 
-        let deviceSpecs = {};
+<!-- DPI -->
+<div class="card">
+  <h4>⚙️ DPI المقترح</h4>
+  <div id="dpiResult"></div>
+</div>
 
-        async function autoAnalyze() {
-            let ua = navigator.userAgent;
-            let modelName = "Android Device";
-            
-            // محاولة ذكية لاستخراج اسم الهاتف من الـ User Agent
-            if (ua.match(/Android/)) {
-                let match = ua.match(/\(([^)]+)\)/);
-                if (match && match[1]) {
-                    let details = match[1].split(';');
-                    // البحث عن كلمات مفتاحية لموديلات مشهورة
-                    let findModel = details.find(d => d.includes('Build') || d.includes('Samsung') || d.includes('Redmi') || d.includes('Xiaomi') || d.includes('Oppo') || d.includes('Vivo'));
-                    if (findModel) {
-                        modelName = findModel.split('Build')[0].replace('Linux', '').replace('Android', '').trim();
-                    } else {
-                        modelName = details[details.length - 1].split('Build')[0].trim();
-                    }
-                }
-            } else if (ua.match(/iPhone/)) {
-                modelName = "iPhone";
-            }
+</main>
 
-            let ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "4GB+";
-            let ip = "127.0.0.1";
-            try {
-                let r = await fetch('https://api.ipify.org?format=json');
-                let d = await r.json();
-                ip = d.ip;
-            } catch(e) {}
+<script>
+// بيانات الجهاز
+const info = {
+  الهاتف: /Samsung/i.test(navigator.userAgent) ? "سامسونج" :
+          /Redmi|Xiaomi/i.test(navigator.userAgent) ? "ريدمي / شاومي" :
+          /Huawei/i.test(navigator.userAgent) ? "هواوي" :
+          "أندرويد",
+  النظام: navigator.platform,
+  الشاشة: `${screen.width} × ${screen.height}`,
+  DPI_تقريبي: window.devicePixelRatio
+};
+const deviceBox=document.getElementById("deviceInfo");
+Object.entries(info).forEach(([k,v])=>{
+  deviceBox.innerHTML+=`<div class="value"><b>${k}</b><br>${v}</div>`;
+});
 
-            deviceSpecs = {
-                model: modelName,
-                ram: ram,
-                ip: ip,
-                isHighEnd: (navigator.deviceMemory >= 6 || modelName.includes("iPhone"))
-            };
+// إعدادات حسب الفئة (دراسة ثابتة)
+const SETTINGS={
+  LOW:{g:85,r:80,x2:75,x4:70,s:60,f:65,dpi:320},
+  MID:{g:92,r:88,x2:82,x4:76,s:68,f:72,dpi:380},
+  HIGH:{g:97,r:94,x2:90,x4:85,s:78,f:80,dpi:420},
+  FLAGSHIP:{g:100,r:98,x2:95,x4:92,s:88,f:90,dpi:460}
+};
 
-            document.getElementById('deviceModel').innerText = deviceSpecs.model;
-            document.getElementById('btnDeviceName').innerText = deviceSpecs.model;
-            document.getElementById('ramSize').innerText = deviceSpecs.ram;
-            document.getElementById('osVersion').innerText = ua.includes("Android") ? "Android" : "iOS";
-            document.getElementById('userIp').innerText = deviceSpecs.ip;
+// قاعدة بيانات الهواتف (قابلة للتوسيع)
+const PHONES=[
+  // Redmi / Xiaomi
+  {n:"Redmi 7",t:"LOW"},
+  {n:"Redmi 8",t:"LOW"},
+  {n:"Redmi 9A",t:"LOW"},
+  {n:"Redmi 10",t:"MID"},
+  {n:"Redmi Note 8",t:"MID"},
+  {n:"Redmi Note 10",t:"MID"},
+  {n:"Redmi Note 11",t:"MID"},
+  {n:"Redmi Note 12",t:"HIGH"},
+  {n:"Redmi Note 13",t:"HIGH"},
+  {n:"Xiaomi 11T",t:"FLAGSHIP"},
+  {n:"Xiaomi 12",t:"FLAGSHIP"},
+  {n:"Xiaomi 13",t:"FLAGSHIP"},
 
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('deviceCard').style.display = 'block';
-            document.getElementById('showSettingsBtn').style.display = 'block';
-        }
+  // Samsung
+  {n:"Galaxy A10",t:"LOW"},
+  {n:"Galaxy A12",t:"LOW"},
+  {n:"Galaxy A21s",t:"LOW"},
+  {n:"Galaxy A32",t:"MID"},
+  {n:"Galaxy A51",t:"MID"},
+  {n:"Galaxy A52",t:"HIGH"},
+  {n:"Galaxy A53",t:"HIGH"},
+  {n:"Galaxy S10",t:"FLAGSHIP"},
+  {n:"Galaxy S21",t:"FLAGSHIP"},
+  {n:"Galaxy S23",t:"FLAGSHIP"},
 
-        function revealSettings() {
-            document.getElementById('showSettingsBtn').style.display = 'none';
-            document.getElementById('sensCard').style.display = 'block';
+  // iPhone
+  {n:"iPhone 7",t:"HIGH"},
+  {n:"iPhone 8",t:"HIGH"},
+  {n:"iPhone X",t:"FLAGSHIP"},
+  {n:"iPhone 11",t:"FLAGSHIP"},
+  {n:"iPhone 12",t:"FLAGSHIP"},
+  {n:"iPhone 13",t:"FLAGSHIP"},
+  {n:"iPhone 14",t:"FLAGSHIP"},
+  {n:"iPhone 15",t:"FLAGSHIP"},
 
-            // معادلة ذكية للإعدادات
-            let s = deviceSpecs.isHighEnd ? 
-                { "عام": 95, "نقطة حمراء": 90, "×2": 93, "×4": 89, "قناصة": 48, "نظرة حرة": 75 } :
-                { "عام": 100, "نقطة حمراء": 98, "×2": 97, "×4": 95, "قناصة": 55, "نظرة حرة": 85 };
+  // Huawei
+  {n:"Huawei Y7",t:"LOW"},
+  {n:"Huawei Y9",t:"LOW"},
+  {n:"Huawei P30",t:"FLAGSHIP"},
 
-            // تحديد الـ DPI بناءً على الموديل أو قوة الجهاز
-            let recommendedDpi = 411; // الافتراضي
-            if (deviceSpecs.isHighEnd) recommendedDpi = 580;
-            if (deviceSpecs.model.toLowerCase().includes('redmi')) recommendedDpi = 449;
-            if (deviceSpecs.model.toLowerCase().includes('samsung')) recommendedDpi = 515;
+  // Tecno / Infinix
+  {n:"Tecno Spark 10",t:"LOW"},
+  {n:"Tecno Camon 18",t:"MID"},
+  {n:"Infinix Hot 11",t:"MID"},
+  {n:"Infinix Zero 5G",t:"HIGH"}
+];
 
-            document.getElementById('dpiValue').innerText = recommendedDpi;
+// البحث الذكي
+const select=document.getElementById("phoneSelect");
+function renderList(list){
+  select.innerHTML='<option value="">اختر هاتفك</option>';
+  list.forEach(p=>{
+    select.innerHTML+=`<option value="${p.t}">${p.n}</option>`;
+  });
+}
+renderList(PHONES);
 
-            const container = document.getElementById('settingsContainer');
-            container.innerHTML = "";
-            for (const [key, val] of Object.entries(s)) {
-                container.innerHTML += `
-                    <div class="sens-item">
-                        <div class="sens-header"><span>${key}</span><span>${val}</span></div>
-                        <div class="progress-bar-bg"><div class="progress-fill" style="width: ${val}%"></div></div>
-                    </div>`;
-            }
-        }
-    </script>
+document.getElementById("searchPhone").addEventListener("input",e=>{
+  const q=e.target.value.toLowerCase();
+  const filtered=PHONES.filter(p=>p.n.toLowerCase().includes(q));
+  renderList(filtered);
+});
+
+// تطبيق الإعدادات
+function applySettings(){
+  const tier=select.value;
+  if(!tier) return;
+  const s=SETTINGS[tier];
+  document.getElementById("settings").innerHTML=`
+    <div class="value">عام<br><b>${s.g}%</b></div>
+    <div class="value">نقطة حمراء<br><b>${s.r}%</b></div>
+    <div class="value">×2<br><b>${s.x2}%</b></div>
+    <div class="value">×4<br><b>${s.x4}%</b></div>
+    <div class="value">عدسة القناصة<br><b>${s.s}%</b></div>
+    <div class="value">نظرة حرة<br><b>${s.f}%</b></div>
+  `;
+  document.getElementById("dpiResult").innerHTML=
+    `<div class="value">DPI مناسب: <b>${s.dpi}</b></div>`;
+}
+</script>
+
 </body>
 </html>
