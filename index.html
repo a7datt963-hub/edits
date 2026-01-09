@@ -1,224 +1,303 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Vipro - Free Fire</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIPRO - Free Fire Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --main-color: #520000;
+            --bg-black: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-white: #ffffff;
+            --accent-gold: #ffcc00;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
 
-<style>
-:root{
-  --main:#520000;
-  --dark:#000;
-}
-*{box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{
-  margin:0;
-  background:#111;
-  color:#fff;
-  display:flex;
-}
-aside{
-  width:260px;
-  background:#000;
-  padding:20px;
-}
-aside h3{color:var(--main)}
-aside a{color:#fff;text-decoration:none;display:block;margin:10px 0}
-main{flex:1;padding:20px}
-header{display:flex;align-items:center;gap:15px}
-header img{width:60px}
-.card{
-  background:#1b1b1b;
-  border-radius:12px;
-  padding:15px;
-  margin-top:20px;
-}
-.card h4{color:var(--main)}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:10px;
-}
-.value{
-  background:#000;
-  padding:10px;
-  border-radius:8px;
-  text-align:center;
-}
-input,select,button{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  margin-top:10px;
-}
-button{
-  background:var(--main);
-  color:#fff;
-  cursor:pointer;
-}
-</style>
+        /* Header & Logo */
+        header {
+            background-color: var(--main-color);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: -2px 0 15px rgba(0,0,0,0.8);
+        }
+
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover { color: var(--main-color); }
+        .closebtn { position: absolute; top: 0; left: 25px; font-size: 36px; }
+
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: var(--main-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            border-radius: 5px;
+            z-index: 999;
+        }
+
+        /* Main Container */
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+
+        /* Data Display Section */
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-right: 5px solid var(--main-color);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-item { background: #252525; padding: 10px; border-radius: 8px; }
+        .info-item span { color: var(--main-color); font-weight: bold; display: block; }
+
+        /* Settings Display */
+        .settings-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a0000);
+            border-radius: 15px;
+            padding: 25px;
+            display: none; /* Shown after analysis */
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .val-num { color: var(--accent-gold); font-size: 20px; font-weight: bold; }
+
+        /* Buttons & Inputs */
+        .btn {
+            background: var(--main-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.02); }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            color: white;
+            border: 1px solid var(--main-color);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .about-section { padding: 20px; font-size: 14px; line-height: 1.6; }
+        .social-links a { color: #e1306c; font-size: 24px; margin: 10px; }
+    </style>
 </head>
-
 <body>
 
-<aside>
-  <h3>حول</h3>
-  <p>
-    نحن مطوروا موقع ايديت فيبرو لعرض افضل اعدادات للعبة فري فاير
-  </p>
+    <button class="openbtn" onclick="openNav()">☰</button>
 
-  <a href="https://www.instagram.com/vipro__store?igsh=dXU4ZWowazlzbXMw" target="_blank">📸 انستغرام</a>
-  <a href="https://wa.me/79228576801">📱 واتساب</a>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <div class="about-section">
+            <h3>حول ايديت فيبرو</h3>
+            <p>نحن مطوروا موقع ايديت فيبرو لعرض أفضل إعدادات للعبة فري فاير بناءً على تحليل عتاد جهازك.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/vipro__store?igsh=dXU4ZWowazlzbXMw" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/79228576801" target="_blank" style="color: #25D366;"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <hr>
+            <a href="https://viproo.netlify.app" target="_blank"><i class="fas fa-shopping-cart"></i> متجرنا الإلكتروني</a>
+        </div>
+    </div>
 
-  <h3>متجرنا</h3>
-  <a href="https://viproo.netlify.app" target="_blank">🛒 viproo.netlify.app</a>
-</aside>
+    <header>
+        <img src="vipro.png" alt="VIPRO LOGO" class="logo" onerror="this.src='https://via.placeholder.com/120x50?text=VIPRO+LOGO'">
+    </header>
 
-<main>
+    <div class="container">
+        <div class="info-card">
+            <h3><i class="fas fa-microchip"></i> تحليل مواصفات الجهاز</h3>
+            <div class="info-grid" id="deviceInfo">
+                <div class="info-item"><span>نوع الهاتف</span> <div id="phoneModel">جاري الفحص...</div></div>
+                <div class="info-item"><span>المعالج (تقديري)</span> <div id="cpuInfo">جاري الفحص...</div></div>
+                <div class="info-item"><span>الذاكرة RAM</span> <div id="ramInfo">جاري الفحص...</div></div>
+                <div class="info-item"><span>عنوان IP</span> <div id="ipAddress">192.168.x.x</div></div>
+            </div>
+        </div>
 
-<header>
-  <img src="vipro.png">
-  <h2>Edit Vipro – Free Fire Settings</h2>
-</header>
+        <div class="info-card">
+            <label>هل تريد اختيار هاتف يدوياً؟</label>
+            <select id="phoneSelect" onchange="manualAnalysis()">
+                <option value="">-- اختر موديل الهاتف --</option>
+                <optgroup label="Xiaomi / Redmi">
+                    <option value="high">Redmi Note 13 Pro+</option>
+                    <option value="mid">Redmi Note 8</option>
+                    <option value="mid">Xiaomi Poco X5</option>
+                </optgroup>
+                <optgroup label="Samsung">
+                    <option value="high">Samsung S24 Ultra</option>
+                    <option value="mid">Samsung A54</option>
+                    <option value="low">Samsung A12</option>
+                </optgroup>
+                <optgroup label="Apple">
+                    <option value="high">iPhone 15 Pro Max</option>
+                    <option value="high">iPhone 13</option>
+                </optgroup>
+                <optgroup label="Infinix / Tecno">
+                    <option value="mid">Tecno Pova 5</option>
+                    <option value="mid">Infinix Note 30</option>
+                </optgroup>
+            </select>
+        </div>
 
-<!-- بيانات الهاتف -->
-<div class="card">
-  <h4>📱 بيانات جهازك</h4>
-  <div class="grid" id="deviceInfo"></div>
-</div>
+        <button class="btn" onclick="generateSettings()">عرض الإعدادات المناسبة بالذكاء الاصطناعي</button>
 
-<!-- البحث الذكي -->
-<div class="card">
-  <h4>🔍 بحث ذكي عن هاتفك</h4>
-  <input type="text" id="searchPhone" placeholder="اكتب اسم الهاتف (مثال: Redmi 8)">
-  <select id="phoneSelect"></select>
-  <button onclick="applySettings()">عرض الإعدادات المناسبة</button>
-</div>
+        <div class="settings-card" id="results">
+            <h3 style="text-align: center; color: var(--accent-gold);"><i class="fas fa-crosshairs"></i> إعدادات الهيدشوت الموصى بها</h3>
+            
+            <div class="setting-row"><span>عام</span><span class="val-num" id="gen">95</span></div>
+            <div class="setting-row"><span>نقطة حمراء</span><span class="val-num" id="red">100</span></div>
+            <div class="setting-row"><span>سكوب ×2</span><span class="val-num" id="x2">90</span></div>
+            <div class="setting-row"><span>سكوب ×4</span><span class="val-num" id="x4">85</span></div>
+            <div class="setting-row"><span>عدسة القناصة</span><span class="val-num" id="sniper">50</span></div>
+            <div class="setting-row"><span>نظرة حرة</span><span class="val-num" id="free">70</span></div>
+            
+            <div style="margin-top:20px; padding:15px; background: rgba(255,255,255,0.1); border-radius:10px;">
+                <span style="color:var(--accent-gold)">إعدادات الـ DPI الموصى بها: </span>
+                <strong id="dpiVal">550</strong>
+            </div>
+        </div>
+    </div>
 
-<!-- الإعدادات -->
-<div class="card">
-  <h4>🎯 إعدادات فري فاير</h4>
-  <div class="grid" id="settings"></div>
-</div>
+    <script>
+        // Sidebar functions
+        function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
+        function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
 
-<!-- DPI -->
-<div class="card">
-  <h4>⚙️ DPI المقترح</h4>
-  <div id="dpiResult"></div>
-</div>
+        // Automatic Data Collection
+        window.onload = function() {
+            analyzeDevice();
+            fetchIP();
+        };
 
-</main>
+        function analyzeDevice() {
+            const ua = navigator.userAgent;
+            let model = "جهاز غير معروف";
+            let ram = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "غير مسموح";
+            
+            if (ua.indexOf("Samsung") > -1) model = "Samsung Device";
+            else if (ua.indexOf("Redmi") > -1 || ua.indexOf("Xiaomi") > -1) model = "Xiaomi/Redmi";
+            else if (ua.indexOf("iPhone") > -1) model = "iPhone";
+            else if (ua.indexOf("Android") > -1) model = "Android Smartphone";
 
-<script>
-// بيانات الجهاز
-const info = {
-  الهاتف: /Samsung/i.test(navigator.userAgent) ? "سامسونج" :
-          /Redmi|Xiaomi/i.test(navigator.userAgent) ? "ريدمي / شاومي" :
-          /Huawei/i.test(navigator.userAgent) ? "هواوي" :
-          "أندرويد",
-  النظام: navigator.platform,
-  الشاشة: `${screen.width} × ${screen.height}`,
-  DPI_تقريبي: window.devicePixelRatio
-};
-const deviceBox=document.getElementById("deviceInfo");
-Object.entries(info).forEach(([k,v])=>{
-  deviceBox.innerHTML+=`<div class="value"><b>${k}</b><br>${v}</div>`;
-});
+            document.getElementById('phoneModel').innerText = model;
+            document.getElementById('ramInfo').innerText = ram;
+            document.getElementById('cpuInfo').innerText = navigator.hardwareConcurrency ? navigator.hardwareConcurrency + " Cores" : "تحت التحليل";
+        }
 
-// إعدادات حسب الفئة (دراسة ثابتة)
-const SETTINGS={
-  LOW:{g:85,r:80,x2:75,x4:70,s:60,f:65,dpi:320},
-  MID:{g:92,r:88,x2:82,x4:76,s:68,f:72,dpi:380},
-  HIGH:{g:97,r:94,x2:90,x4:85,s:78,f:80,dpi:420},
-  FLAGSHIP:{g:100,r:98,x2:95,x4:92,s:88,f:90,dpi:460}
-};
+        async function fetchIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                document.getElementById('ipAddress').innerText = data.ip;
+            } catch (e) {
+                document.getElementById('ipAddress').innerText = "تعذر الجلب (تحقق من الاتصال)";
+            }
+        }
 
-// قاعدة بيانات الهواتف (قابلة للتوسيع)
-const PHONES=[
-  // Redmi / Xiaomi
-  {n:"Redmi 7",t:"LOW"},
-  {n:"Redmi 8",t:"LOW"},
-  {n:"Redmi 9A",t:"LOW"},
-  {n:"Redmi 10",t:"MID"},
-  {n:"Redmi Note 8",t:"MID"},
-  {n:"Redmi Note 10",t:"MID"},
-  {n:"Redmi Note 11",t:"MID"},
-  {n:"Redmi Note 12",t:"HIGH"},
-  {n:"Redmi Note 13",t:"HIGH"},
-  {n:"Xiaomi 11T",t:"FLAGSHIP"},
-  {n:"Xiaomi 12",t:"FLAGSHIP"},
-  {n:"Xiaomi 13",t:"FLAGSHIP"},
+        function generateSettings() {
+            // "AI" Logic based on device performance
+            const isHighEnd = navigator.hardwareConcurrency > 4 || navigator.deviceMemory > 4;
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
+            
+            if (isHighEnd) {
+                setVals(98, 100, 95, 92, 50, 80, 600);
+            } else {
+                setVals(100, 100, 100, 98, 70, 90, 411);
+            }
+            
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
 
-  // Samsung
-  {n:"Galaxy A10",t:"LOW"},
-  {n:"Galaxy A12",t:"LOW"},
-  {n:"Galaxy A21s",t:"LOW"},
-  {n:"Galaxy A32",t:"MID"},
-  {n:"Galaxy A51",t:"MID"},
-  {n:"Galaxy A52",t:"HIGH"},
-  {n:"Galaxy A53",t:"HIGH"},
-  {n:"Galaxy S10",t:"FLAGSHIP"},
-  {n:"Galaxy S21",t:"FLAGSHIP"},
-  {n:"Galaxy S23",t:"FLAGSHIP"},
+        function manualAnalysis() {
+            const val = document.getElementById('phoneSelect').value;
+            if(!val) return;
+            
+            document.getElementById('results').style.display = 'block';
+            if (val === "high") {
+                setVals(92, 95, 88, 85, 45, 60, 720);
+            } else if (val === "mid") {
+                setVals(98, 100, 94, 90, 50, 75, 500);
+            } else {
+                setVals(100, 100, 100, 100, 60, 80, 390);
+            }
+        }
 
-  // iPhone
-  {n:"iPhone 7",t:"HIGH"},
-  {n:"iPhone 8",t:"HIGH"},
-  {n:"iPhone X",t:"FLAGSHIP"},
-  {n:"iPhone 11",t:"FLAGSHIP"},
-  {n:"iPhone 12",t:"FLAGSHIP"},
-  {n:"iPhone 13",t:"FLAGSHIP"},
-  {n:"iPhone 14",t:"FLAGSHIP"},
-  {n:"iPhone 15",t:"FLAGSHIP"},
-
-  // Huawei
-  {n:"Huawei Y7",t:"LOW"},
-  {n:"Huawei Y9",t:"LOW"},
-  {n:"Huawei P30",t:"FLAGSHIP"},
-
-  // Tecno / Infinix
-  {n:"Tecno Spark 10",t:"LOW"},
-  {n:"Tecno Camon 18",t:"MID"},
-  {n:"Infinix Hot 11",t:"MID"},
-  {n:"Infinix Zero 5G",t:"HIGH"}
-];
-
-// البحث الذكي
-const select=document.getElementById("phoneSelect");
-function renderList(list){
-  select.innerHTML='<option value="">اختر هاتفك</option>';
-  list.forEach(p=>{
-    select.innerHTML+=`<option value="${p.t}">${p.n}</option>`;
-  });
-}
-renderList(PHONES);
-
-document.getElementById("searchPhone").addEventListener("input",e=>{
-  const q=e.target.value.toLowerCase();
-  const filtered=PHONES.filter(p=>p.n.toLowerCase().includes(q));
-  renderList(filtered);
-});
-
-// تطبيق الإعدادات
-function applySettings(){
-  const tier=select.value;
-  if(!tier) return;
-  const s=SETTINGS[tier];
-  document.getElementById("settings").innerHTML=`
-    <div class="value">عام<br><b>${s.g}%</b></div>
-    <div class="value">نقطة حمراء<br><b>${s.r}%</b></div>
-    <div class="value">×2<br><b>${s.x2}%</b></div>
-    <div class="value">×4<br><b>${s.x4}%</b></div>
-    <div class="value">عدسة القناصة<br><b>${s.s}%</b></div>
-    <div class="value">نظرة حرة<br><b>${s.f}%</b></div>
-  `;
-  document.getElementById("dpiResult").innerHTML=
-    `<div class="value">DPI مناسب: <b>${s.dpi}</b></div>`;
-}
-</script>
-
+        function setVals(g, r, x2, x4, s, f, dpi) {
+            document.getElementById('gen').innerText = g;
+            document.getElementById('red').innerText = r;
+            document.getElementById('x2').innerText = x2;
+            document.getElementById('x4').innerText = x4;
+            document.getElementById('sniper').innerText = s;
+            document.getElementById('free').innerText = f;
+            document.getElementById('dpiVal').innerText = dpi;
+        }
+    </script>
 </body>
-  </html>
+</html>
